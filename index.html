@@ -28,37 +28,31 @@
 
             if (isIOS) {
                 var now = Date.now();
+                var chromeInstalled = false;
                 var chromeQuery = 'googlechrome://g.page/r/CcN_-2m8sPZ0EB0/review';
                 var appStoreURL = 'https://apps.apple.com/us/app/google-chrome/id535886823';
-                var triedChrome = false;
+                var query = 'https://g.page/r/CcN_-2m8sPZ0EB0/review';
 
-                // Create a temporary iframe to detect if Chrome is installed
-                var iframe = document.createElement('iframe');
-                iframe.style.display = 'none';
-                document.body.appendChild(iframe);
+                window.location = chromeQuery;
 
-                var timeout = setTimeout(function () {
-                    if (!triedChrome) {
-                        document.getElementById('chromeButton').innerHTML = "Installer Google Chrome";
-                    }
-                    document.body.removeChild(iframe);
-                }, 1000);
-
-                // Try to open Chrome via the iframe
-                iframe.src = chromeQuery;
-
-                // Detect if Chrome is installed based on the focus/blur events
+                // Vérifie si Chrome est installé en fonction des événements blur/focus
                 window.addEventListener('blur', function () {
-                    triedChrome = true;
-                    clearTimeout(timeout);
+                    chromeInstalled = true;
                     document.getElementById('chromeButton').innerHTML = "Répondre avec Google Chrome";
                 });
 
                 window.addEventListener('focus', function () {
-                    if (Date.now() - now < 1500 && !triedChrome) {
+                    if (!chromeInstalled && Date.now() - now < 2000) {
                         document.getElementById('chromeButton').innerHTML = "Installer Google Chrome";
                     }
                 });
+
+                // Si le retour se fait rapidement, on considère que Chrome n'est pas installé
+                setTimeout(function () {
+                    if (!chromeInstalled && Date.now() - now < 1500) {
+                        document.getElementById('chromeButton').innerHTML = "Installer Google Chrome";
+                    }
+                }, 1500);
             } else {
                 document.getElementById('chromeButton').style.display = "none";
             }
