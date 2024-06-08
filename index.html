@@ -2,9 +2,28 @@
 <html>
 <head>
     <title>Redirection en cours</title>
-    <meta http-equiv="refresh" content="0; url=googlechrome://g.page/r/CcN_-2m8sPZ0EB0/review" />
+    <script>
+        function openLink() {
+            var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            var isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
+
+            var query = 'https://g.page/r/CcN_-2m8sPZ0EB0/review';
+            var chromeQuery = 'googlechrome://g.page/r/CcN_-2m8sPZ0EB0/review';
+
+            if (isIOS) {
+                // Tente d'ouvrir Chrome sur iOS avec un délai avant de rediriger vers Safari
+                setTimeout(function() {
+                    window.location = query;
+                }, 3000); // Augmente le délai à 3 secondes
+                window.location = chromeQuery;
+            } else {
+                // Pour les autres plateformes
+                window.location = query;
+            }
+        }
+    </script>
 </head>
-<body>
+<body onload="openLink()">
     <p>Redirection en cours...</p>
 </body>
 </html>
