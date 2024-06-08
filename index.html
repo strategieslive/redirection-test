@@ -1,42 +1,77 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Redirection en cours</title>
+    <title>Choisissez votre navigateur</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px;
+            color: white;
+            background-color: #007bff;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .button-secondary {
+            background-color: #6c757d;
+        }
+    </style>
     <script>
-        function openLink() {
+        function detectChrome() {
             var userAgent = navigator.userAgent || navigator.vendor || window.opera;
             var isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
 
-            var chromeQuery = 'googlechrome://g.page/r/CcN_-2m8sPZ0EB0/review';
-            var appStoreURL = 'https://apps.apple.com/us/app/google-chrome/id535886823';
-            var query = 'https://g.page/r/CcN_-2m8sPZ0EB0/review';
-
             if (isIOS) {
-                // Essaye d'ouvrir Chrome sur iOS en utilisant une balise meta refresh
-                var start = Date.now();
-                var timeout = setTimeout(function() {
-                    if (Date.now() - start < 1000) {
-                        // Si le temps écoulé est inférieur à 1 seconde, Chrome n'est probablement pas installé
-                        window.location = appStoreURL;
-                    }
-                }, 800); // délai de 0,8 seconde
+                var chromeInstalled = false;
+                var iframe = document.createElement('iframe');
+                iframe.style.display = 'none';
+                iframe.onload = function() {
+                    chromeInstalled = true;
+                    document.getElementById('chromeButton').innerHTML = "Répondre avec Google Chrome";
+                    iframe.remove();
+                };
+                iframe.onerror = function() {
+                    document.getElementById('chromeButton').innerHTML = "Installer Google Chrome";
+                    iframe.remove();
+                };
+                iframe.src = "googlechrome://";
+                document.body.appendChild(iframe);
 
-                window.location = chromeQuery;
-
-                // Redirige vers l'URL normale après un délai pour éviter l'erreur de Safari
+                // Si l'iframe n'a pas été chargé après 1 seconde, on suppose que Chrome n'est pas installé
                 setTimeout(function() {
-                    if (Date.now() - start < 1500) {
-                        window.location = query;
+                    if (!chromeInstalled) {
+                        document.getElementById('chromeButton').innerHTML = "Installer Google Chrome";
                     }
-                }, 1500); // Délai de 1,5 secondes
+                }, 1000);
             } else {
-                // Pour les autres plateformes
-                window.location = query;
+                document.getElementById('chromeButton').style.display = "none";
             }
         }
+
+        function openChrome() {
+            var chromeQuery = 'googlechrome://g.page/r/CcN_-2m8sPZ0EB0/review';
+            var appStoreURL = 'https://apps.apple.com/us/app/google-chrome/id535886823';
+            var buttonText = document.getElementById('chromeButton').innerHTML;
+
+            if (buttonText === "Répondre avec Google Chrome") {
+                window.location = chromeQuery;
+            } else {
+                window.location = appStoreURL;
+            }
+        }
+
+        window.onload = detectChrome;
     </script>
 </head>
-<body onload="openLink()">
-    <p>Redirection en cours...</p>
+<body>
+    <h1>Choisissez votre navigateur</h1>
+    <p>Pour une meilleure expérience, nous vous recommandons d'utiliser Google Chrome.</p>
+    <a id="chromeButton" class="button" href="#" onclick="openChrome()">Vérification...</a>
+    <a href="https://g.page/r/CcN_-2m8sPZ0EB0/review" class="button button-secondary">Répondre avec Safari</a>
 </body>
 </html>
