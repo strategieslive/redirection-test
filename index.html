@@ -18,6 +18,7 @@
             border-radius: 10px;
             max-width: 500px;
             margin: 50px auto;
+            display: none; /* Le conteneur est initialement caché et sera affiché par JavaScript si l'appareil est un iOS */
         }
         h1 {
             color: #333;
@@ -60,10 +61,10 @@
     </style>
 </head>
 <body>
-    <div class="container" id="iosContainer" style="display: none;">
+    <div class="container" id="iosContainer">
         <h1>Laissez un avis</h1>
         <p>Choisissez votre navigateur préféré pour laisser un avis :</p>
-        <a class="button button-safari" href="https://g.page/r/CcN_-2m8sPZ0EB0/review">
+        <a class="button button-safari" href="https://g.page/r/CcN_-2m8sPZ0EB0/review" target="_blank" rel="noopener noreferrer">
             <img src="safari-logo.png" alt="Laissez un avis avec Safari" width="24" height="24"> Laissez un avis avec Safari
         </a>
         <a class="button button-chrome" href="#" onclick="openChrome()">
@@ -85,11 +86,14 @@
 
         function openChrome() {
             var chromeURL = 'googlechrome://g.page/r/CcN_-2m8sPZ0EB0/review';
-            try {
-                window.location = chromeURL;
-            } catch (e) {
-                alert("Google Chrome n'est pas installé ou ne peut pas ouvrir le lien.");
-            }
+            window.location.href = chromeURL;
+            setTimeout(function() {
+                // Vérifie si la page est toujours chargée sur le même domaine après 1000ms
+                if (document.hasFocus()) {
+                    // Redirige vers l'App Store pour télécharger Chrome
+                    window.location.href = 'https://apps.apple.com/app/google-chrome/id535886823';
+                }
+            }, 1000);
         }
 
         document.addEventListener("DOMContentLoaded", detectDeviceAndRedirect);
