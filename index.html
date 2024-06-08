@@ -32,26 +32,6 @@
     <script>
         function openChrome() {
             var chromeURL = 'googlechrome://g.page/r/CcN_-2m8sPZ0EB0/review';
-            var start = Date.now();
-            var timeout;
-
-            var handleVisibilityChange = function() {
-                if (document.visibilityState === 'hidden') {
-                    clearTimeout(timeout);
-                } else if (document.visibilityState === 'visible' && Date.now() - start < 2500) {
-                    alert("Google Chrome n'est pas installé.");
-                }
-            };
-
-            document.addEventListener('visibilitychange', handleVisibilityChange);
-
-            timeout = setTimeout(function() {
-                if (Date.now() - start < 2500) {
-                    alert("Google Chrome n'est pas installé.");
-                    document.removeEventListener('visibilitychange', handleVisibilityChange);
-                }
-            }, 2000);
-
             window.location = chromeURL;
         }
     </script>
