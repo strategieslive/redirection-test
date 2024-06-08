@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Redirection vers L'Estive</title>
+    <title>Redirection vers Le Jardin</title>
     <script>
         function openLink() {
             var userAgent = navigator.userAgent || navigator.vendor || window.opera;
             document.body.innerHTML += "<p>User Agent: " + userAgent + "</p>";
 
-            // URL de la requête pour L'Estive à Hyères
-            var query = 'https://www.google.com/maps/search/?api=1&query=L%27Estive+Hy%C3%A8res';
-            var chromeQuery = 'googlechrome://www.google.com/maps/search/?api=1&query=L%27Estive+Hy%C3%A8res';
+            // URL de la requête pour Le Jardin à Hyères
+            var query = 'https://www.google.com/maps/place/Le+Jardin/@43.1201764,6.1275013,17z/data=!3m1!4b1!4m6!3m5!1s0x12c923a25d4dc611:0x7512177f0926b4ea!8m2!3d43.1201725!4d6.1300762!16s%2Fg%2F1wf4qmcf?entry=ttu';
+            var chromeQuery = 'googlechrome://www.google.com/maps/place/Le+Jardin/@43.1201764,6.1275013,17z/data=!3m1!4b1!4m6!3m5!1s0x12c923a25d4dc611:0x7512177f0926b4ea!8m2!3d43.1201725!4d6.1300762!16s%2Fg%2F1wf4qmcf?entry=ttu';
 
             // Vérifie si l'utilisateur est sur iOS
             var isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
