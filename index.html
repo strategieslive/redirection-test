@@ -36,10 +36,10 @@
 
             var now = Date.now();
             var timeout = setTimeout(function() {
-                if (Date.now() - now < 1500) {
+                if (Date.now() - now < 2500) { // Augmenter le délai à 2.5 secondes
                     window.location = appStoreURL;
                 }
-            }, 1000);
+            }, 2000); // Augmenter le délai à 2 secondes
 
             window.location = chromeURL;
 
@@ -48,7 +48,7 @@
             });
 
             window.addEventListener('pageshow', function() {
-                if (Date.now() - now < 1500) {
+                if (Date.now() - now < 2500) {
                     window.location = appStoreURL;
                 }
             });
