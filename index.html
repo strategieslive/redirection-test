@@ -2,18 +2,38 @@
 <html>
 <head>
     <title>Redirection en cours</title>
-    <meta http-equiv="refresh" content="0; url=googlechrome://g.page/r/CcN_-2m8sPZ0EB0/review" />
     <script>
         function openLink() {
             var userAgent = navigator.userAgent || navigator.vendor || window.opera;
             var isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
+            var query = 'https://g.page/r/CcN_-2m8sPZ0EB0/review';
+            var chromeQuery = 'googlechrome://g.page/r/CcN_-2m8sPZ0EB0/review';
+            var triedChrome = false;
 
             if (isIOS) {
-                // Tente d'ouvrir Chrome sur iOS
-                window.location = 'googlechrome://g.page/r/CcN_-2m8sPZ0EB0/review';
+                // Essaye d'ouvrir Chrome sur iOS
+                var timeout = setTimeout(function() {
+                    if (!triedChrome) {
+                        window.location = query;
+                    }
+                }, 1000); // délai de 1 seconde
+
+                window.location = chromeQuery;
+
+                // Fonction pour vérifier si l'utilisateur revient après avoir essayé d'ouvrir Chrome
+                window.addEventListener('blur', function() {
+                    clearTimeout(timeout);
+                    triedChrome = true;
+                });
+
+                window.addEventListener('focus', function() {
+                    if (!triedChrome) {
+                        window.location = query;
+                    }
+                });
             } else {
                 // Pour les autres plateformes
-                window.location = 'https://g.page/r/CcN_-2m8sPZ0EB0/review';
+                window.location = query;
             }
         }
     </script>
