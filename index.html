@@ -16,11 +16,11 @@
             document.body.innerHTML += "<p>Is iOS: " + isIOS + "</p>";
 
             if (isIOS) {
-                // Tente d'ouvrir Chrome sur iOS
+                // Tente d'ouvrir Chrome sur iOS avec un délai plus long avant de rediriger vers Safari
                 setTimeout(function() {
                     document.body.innerHTML += "<p>Redirection vers Chrome échouée, redirection vers Safari.</p>";
                     window.location = query;
-                }, 25);
+                }, 2000); // Augmente le délai à 2 secondes
                 window.location = chromeQuery;
             } else {
                 // Pour les autres plateformes
