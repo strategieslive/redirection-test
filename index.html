@@ -32,12 +32,11 @@
     <script>
         function openChrome() {
             var chromeURL = 'googlechrome://g.page/r/CcN_-2m8sPZ0EB0/review';
-            var appStoreURL = 'https://apps.apple.com/us/app/google-chrome/id535886823';
 
             var now = Date.now();
             var timeout = setTimeout(function() {
                 if (Date.now() - now < 2500) { // Augmenter le délai à 2.5 secondes
-                    window.location = appStoreURL;
+                    alert("Google Chrome n'est pas installé.");
                 }
             }, 2000); // Augmenter le délai à 2 secondes
 
@@ -49,7 +48,7 @@
 
             window.addEventListener('pageshow', function() {
                 if (Date.now() - now < 2500) {
-                    window.location = appStoreURL;
+                    alert("Google Chrome n'est pas installé.");
                 }
             });
         }
