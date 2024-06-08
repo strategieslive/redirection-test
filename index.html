@@ -25,53 +25,34 @@
         function detectChrome() {
             var userAgent = navigator.userAgent || navigator.vendor || window.opera;
             var isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
+            var chromeButton = document.getElementById('chromeButton');
+            var appStoreURL = 'https://apps.apple.com/us/app/google-chrome/id535886823';
+            var chromeURL = 'googlechrome://g.page/r/CcN_-2m8sPZ0EB0/review';
 
             if (isIOS) {
-                var now = Date.now();
-                var chromeInstalled = false;
-                var chromeQuery = 'googlechrome://';
-                var appStoreURL = 'https://apps.apple.com/us/app/google-chrome/id535886823';
-
-                // Crée un iframe caché pour tenter d'ouvrir Chrome
                 var iframe = document.createElement('iframe');
                 iframe.style.display = 'none';
                 document.body.appendChild(iframe);
 
-                // Événements de détection
-                window.addEventListener('blur', function () {
-                    chromeInstalled = true;
-                    document.getElementById('chromeButton').innerHTML = "Répondre avec Google Chrome";
-                });
-
-                window.addEventListener('focus', function () {
-                    if (!chromeInstalled && Date.now() - now < 2000) {
-                        document.getElementById('chromeButton').innerHTML = "Installer Google Chrome";
-                    }
-                });
-
-                // Si le retour est rapide, on considère que Chrome n'est pas installé
-                setTimeout(function () {
-                    if (!chromeInstalled && Date.now() - now < 1500) {
-                        document.getElementById('chromeButton').innerHTML = "Installer Google Chrome";
-                    }
+                // Tentative d'ouverture de Google Chrome
+                iframe.onload = function() {
+                    // Si onload est déclenché, cela signifie que Chrome a été détecté
+                    chromeButton.innerHTML = "Répondre avec Google Chrome";
+                    chromeButton.href = chromeURL;
                     document.body.removeChild(iframe);
-                }, 1000);
+                };
 
-                iframe.src = chromeQuery;
+                iframe.onerror = function() {
+                    // Si onerror est déclenché, cela signifie que Chrome n'est pas installé
+                    chromeButton.innerHTML = "Installer Google Chrome";
+                    chromeButton.href = appStoreURL;
+                    document.body.removeChild(iframe);
+                };
+
+                // Définir l'URL de l'iframe pour tenter d'ouvrir Google Chrome
+                iframe.src = chromeURL;
             } else {
-                document.getElementById('chromeButton').style.display = "none";
-            }
-        }
-
-        function openChrome() {
-            var chromeQuery = 'googlechrome://g.page/r/CcN_-2m8sPZ0EB0/review';
-            var appStoreURL = 'https://apps.apple.com/us/app/google-chrome/id535886823';
-            var buttonText = document.getElementById('chromeButton').innerHTML;
-
-            if (buttonText === "Répondre avec Google Chrome") {
-                window.location = chromeQuery;
-            } else {
-                window.location = appStoreURL;
+                chromeButton.style.display = "none";
             }
         }
 
@@ -81,7 +62,7 @@
 <body>
     <h1>Choisissez votre navigateur</h1>
     <p>Pour une meilleure expérience, nous vous recommandons d'utiliser Google Chrome.</p>
-    <a id="chromeButton" class="button" href="#" onclick="openChrome()">Vérification...</a>
+    <a id="chromeButton" class="button" href="#">Vérification...</a>
     <a href="https://g.page/r/CcN_-2m8sPZ0EB0/review" class="button button-secondary">Répondre avec Safari</a>
 </body>
 </html>
