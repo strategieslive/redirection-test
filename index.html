@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Redirection basée sur le navigateur</title>
+    <title>Redirection vers L'Estive</title>
     <script>
         function openLink() {
             var userAgent = navigator.userAgent || navigator.vendor || window.opera;
             document.body.innerHTML += "<p>User Agent: " + userAgent + "</p>";
 
-            // Schéma d'URL à ouvrir pour la requête "Restaurant Hyères"
-            var query = 'https://www.google.com/search?q=Restaurant+Hy%C3%A8res';
-            var chromeQuery = 'googlechrome://www.google.com/search?q=Restaurant+Hy%C3%A8res';
+            // URL de la requête pour L'Estive à Hyères
+            var query = 'https://www.google.com/maps/search/?api=1&query=L%27Estive+Hy%C3%A8res';
+            var chromeQuery = 'googlechrome://www.google.com/maps/search/?api=1&query=L%27Estive+Hy%C3%A8res';
 
             // Vérifie si l'utilisateur est sur iOS
             var isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
@@ -19,11 +19,14 @@
                 // Vérifie si l'utilisateur utilise Chrome sur iOS
                 if (userAgent.indexOf("CriOS") > -1) {
                     document.body.innerHTML += "<p>Using Chrome on iOS. URL: <a href='" + chromeQuery + "'>" + chromeQuery + "</a></p>";
+                    window.location = chromeQuery;
                 } else {
                     document.body.innerHTML += "<p>Using Safari on iOS. URL: <a href='" + query + "'>" + query + "</a></p>";
+                    window.location = query;
                 }
             } else {
                 document.body.innerHTML += "<p>Not iOS. URL: <a href='" + query + "'>" + query + "</a></p>";
+                window.location = query;
             }
         }
     </script>
