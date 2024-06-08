@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Choisissez votre navigateur</title>
+    <title>Laissez un avis</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -10,60 +10,59 @@
         }
         .button {
             display: inline-block;
-            padding: 10px 20px;
-            margin: 10px;
+            padding: 20px 30px;
+            margin: 20px;
+            font-size: 20px;
             color: white;
-            background-color: #007bff;
             text-decoration: none;
-            border-radius: 5px;
+            border-radius: 10px;
+            width: 300px;
         }
-        .button-secondary {
-            background-color: #6c757d;
+        .button-safari {
+            background-color: #1e90ff;
+        }
+        .button-chrome {
+            background-color: #f44336;
+        }
+        .button img {
+            vertical-align: middle;
+            margin-right: 10px;
         }
     </style>
     <script>
-        function detectChrome() {
-            var userAgent = navigator.userAgent || navigator.vendor || window.opera;
-            var isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
-            var chromeButton = document.getElementById('chromeButton');
-            var appStoreURL = 'https://apps.apple.com/us/app/google-chrome/id535886823';
+        function openChrome() {
             var chromeURL = 'googlechrome://g.page/r/CcN_-2m8sPZ0EB0/review';
+            var appStoreURL = 'https://apps.apple.com/us/app/google-chrome/id535886823';
 
-            if (isIOS) {
-                var now = Date.now();
-                var timeout = setTimeout(function() {
-                    if (Date.now() - now < 1500) {
-                        chromeButton.innerHTML = "Installer Google Chrome";
-                        chromeButton.href = appStoreURL;
-                    }
-                }, 1000);
+            var now = Date.now();
+            var timeout = setTimeout(function() {
+                if (Date.now() - now < 1500) {
+                    window.location = appStoreURL;
+                }
+            }, 1000);
 
-                window.location = chromeURL;
+            window.location = chromeURL;
 
-                window.addEventListener('pagehide', function() {
-                    clearTimeout(timeout);
-                    chromeButton.innerHTML = "Répondre avec Google Chrome";
-                    chromeButton.href = chromeURL;
-                });
+            window.addEventListener('pagehide', function() {
+                clearTimeout(timeout);
+            });
 
-                window.addEventListener('pageshow', function() {
-                    if (Date.now() - now < 1500) {
-                        chromeButton.innerHTML = "Installer Google Chrome";
-                        chromeButton.href = appStoreURL;
-                    }
-                });
-            } else {
-                chromeButton.style.display = "none";
-            }
+            window.addEventListener('pageshow', function() {
+                if (Date.now() - now < 1500) {
+                    window.location = appStoreURL;
+                }
+            });
         }
-
-        window.onload = detectChrome;
     </script>
 </head>
 <body>
-    <h1>Choisissez votre navigateur</h1>
-    <p>Pour une meilleure expérience, nous vous recommandons d'utiliser Google Chrome.</p>
-    <a id="chromeButton" class="button" href="#">Vérification...</a>
-    <a href="https://g.page/r/CcN_-2m8sPZ0EB0/review" class="button button-secondary">Répondre avec Safari</a>
+    <h1>Laissez un avis</h1>
+    <p>Choisissez votre navigateur préféré pour laisser un avis :</p>
+    <a class="button button-safari" href="https://g.page/r/CcN_-2m8sPZ0EB0/review">
+        <img src="safari-logo.png" alt="Safari" width="24" height="24"> Laissez un avis avec Safari
+    </a>
+    <a class="button button-chrome" href="#" onclick="openChrome()">
+        <img src="chrome-logo.png" alt="Chrome" width="24" height="24"> Laissez un avis avec Google Chrome
+    </a>
 </body>
 </html>
