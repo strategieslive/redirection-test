@@ -86,14 +86,11 @@
 
         function openChrome() {
             var chromeURL = 'googlechrome://g.page/r/CcN_-2m8sPZ0EB0/review';
-            window.location.href = chromeURL;
-            setTimeout(function() {
-                // Vérifie si la page est toujours chargée sur le même domaine après 1000ms
-                if (document.hasFocus()) {
-                    // Redirige vers l'App Store pour télécharger Chrome
-                    window.location.href = 'https://apps.apple.com/app/google-chrome/id535886823';
-                }
-            }, 1000);
+            try {
+                window.location = chromeURL;
+            } catch (e) {
+                alert("Google Chrome n'est pas installé ou ne peut pas ouvrir le lien.");
+            }
         }
 
         document.addEventListener("DOMContentLoaded", detectDeviceAndRedirect);
