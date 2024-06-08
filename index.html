@@ -30,27 +30,28 @@
             var chromeURL = 'googlechrome://g.page/r/CcN_-2m8sPZ0EB0/review';
 
             if (isIOS) {
-                var iframe = document.createElement('iframe');
-                iframe.style.display = 'none';
-                document.body.appendChild(iframe);
+                var now = Date.now();
+                var timeout = setTimeout(function() {
+                    if (Date.now() - now < 1500) {
+                        chromeButton.innerHTML = "Installer Google Chrome";
+                        chromeButton.href = appStoreURL;
+                    }
+                }, 1000);
 
-                // Tentative d'ouverture de Google Chrome
-                iframe.onload = function() {
-                    // Si onload est déclenché, cela signifie que Chrome a été détecté
+                window.location = chromeURL;
+
+                window.addEventListener('pagehide', function() {
+                    clearTimeout(timeout);
                     chromeButton.innerHTML = "Répondre avec Google Chrome";
                     chromeButton.href = chromeURL;
-                    document.body.removeChild(iframe);
-                };
+                });
 
-                iframe.onerror = function() {
-                    // Si onerror est déclenché, cela signifie que Chrome n'est pas installé
-                    chromeButton.innerHTML = "Installer Google Chrome";
-                    chromeButton.href = appStoreURL;
-                    document.body.removeChild(iframe);
-                };
-
-                // Définir l'URL de l'iframe pour tenter d'ouvrir Google Chrome
-                iframe.src = chromeURL;
+                window.addEventListener('pageshow', function() {
+                    if (Date.now() - now < 1500) {
+                        chromeButton.innerHTML = "Installer Google Chrome";
+                        chromeButton.href = appStoreURL;
+                    }
+                });
             } else {
                 chromeButton.style.display = "none";
             }
