@@ -41,11 +41,13 @@
                 window.addEventListener('blur', function () {
                     chromeInstalled = true;
                     document.getElementById('chromeButton').innerHTML = "Répondre avec Google Chrome";
+                    document.getElementById('chromeButton').setAttribute('href', 'googlechrome://g.page/r/CcN_-2m8sPZ0EB0/review');
                 });
 
                 window.addEventListener('focus', function () {
                     if (!chromeInstalled && Date.now() - now < 2000) {
                         document.getElementById('chromeButton').innerHTML = "Installer Google Chrome";
+                        document.getElementById('chromeButton').setAttribute('href', appStoreURL);
                     }
                 });
 
@@ -53,6 +55,7 @@
                 setTimeout(function () {
                     if (!chromeInstalled && Date.now() - now < 1500) {
                         document.getElementById('chromeButton').innerHTML = "Installer Google Chrome";
+                        document.getElementById('chromeButton').setAttribute('href', appStoreURL);
                     }
                     document.body.removeChild(iframe);
                 }, 1000);
@@ -63,25 +66,13 @@
             }
         }
 
-        function openChrome() {
-            var chromeQuery = 'googlechrome://g.page/r/CcN_-2m8sPZ0EB0/review';
-            var appStoreURL = 'https://apps.apple.com/us/app/google-chrome/id535886823';
-            var buttonText = document.getElementById('chromeButton').innerHTML;
-
-            if (buttonText === "Répondre avec Google Chrome") {
-                window.location = chromeQuery;
-            } else {
-                window.location = appStoreURL;
-            }
-        }
-
         window.onload = detectChrome;
     </script>
 </head>
 <body>
     <h1>Choisissez votre navigateur</h1>
     <p>Pour une meilleure expérience, nous vous recommandons d'utiliser Google Chrome.</p>
-    <a id="chromeButton" class="button" href="#" onclick="openChrome()">Vérification...</a>
+    <a id="chromeButton" class="button" href="#">Vérification...</a>
     <a href="https://g.page/r/CcN_-2m8sPZ0EB0/review" class="button button-secondary">Répondre avec Safari</a>
 </body>
 </html>
