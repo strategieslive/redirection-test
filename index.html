@@ -29,13 +29,15 @@
             if (isIOS) {
                 var now = Date.now();
                 var chromeInstalled = false;
-                var chromeQuery = 'googlechrome://g.page/r/CcN_-2m8sPZ0EB0/review';
+                var chromeQuery = 'googlechrome://';
                 var appStoreURL = 'https://apps.apple.com/us/app/google-chrome/id535886823';
-                var query = 'https://g.page/r/CcN_-2m8sPZ0EB0/review';
 
-                window.location = chromeQuery;
+                // Crée un iframe caché pour tenter d'ouvrir Chrome
+                var iframe = document.createElement('iframe');
+                iframe.style.display = 'none';
+                document.body.appendChild(iframe);
 
-                // Vérifie si Chrome est installé en fonction des événements blur/focus
+                // Événements de détection
                 window.addEventListener('blur', function () {
                     chromeInstalled = true;
                     document.getElementById('chromeButton').innerHTML = "Répondre avec Google Chrome";
@@ -47,12 +49,15 @@
                     }
                 });
 
-                // Si le retour se fait rapidement, on considère que Chrome n'est pas installé
+                // Si le retour est rapide, on considère que Chrome n'est pas installé
                 setTimeout(function () {
                     if (!chromeInstalled && Date.now() - now < 1500) {
                         document.getElementById('chromeButton').innerHTML = "Installer Google Chrome";
                     }
-                }, 1500);
+                    document.body.removeChild(iframe);
+                }, 1000);
+
+                iframe.src = chromeQuery;
             } else {
                 document.getElementById('chromeButton').style.display = "none";
             }
