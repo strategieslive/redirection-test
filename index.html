@@ -17,6 +17,7 @@
             border-radius: 10px;
             max-width: 500px;
             margin: 50px auto;
+            display: none; /* Par défaut, le contenu est caché */
         }
         h1 {
             color: #333;
@@ -61,20 +62,19 @@
         function detectDeviceAndRedirect() {
             var userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
-            if (/windows phone/i.test(userAgent)) {
+            if (/windows phone|windows/i.test(userAgent)) {
                 window.location.href = "https://g.page/r/CcN_-2m8sPZ0EB0/review";
             } else if (/android/i.test(userAgent)) {
                 window.location.href = "https://g.page/r/CcN_-2m8sPZ0EB0/review";
             } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-                // iOS device, do nothing and show the buttons
-            } else if (/windows/i.test(userAgent)) {
-                window.location.href = "https://g.page/r/CcN_-2m8sPZ0EB0/review";
+                // iOS device, afficher le contenu
+                document.querySelector('.container').style.display = 'block';
             } else {
                 window.location.href = "https://g.page/r/CcN_-2m8sPZ0EB0/review";
             }
         }
 
-        document.addEventListener('DOMContentLoaded', detectDeviceAndRedirect);
+        detectDeviceAndRedirect();
     </script>
 </head>
 <body>
