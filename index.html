@@ -16,15 +16,12 @@
             document.body.innerHTML += "<p>Is iOS: " + isIOS + "</p>";
 
             if (isIOS) {
-                // Vérifie si l'utilisateur utilise Chrome sur iOS
-                if (userAgent.indexOf("CriOS") > -1) {
-                    document.body.innerHTML += "<p>Using Chrome on iOS. URL: <a href='" + chromeQuery + "'>" + chromeQuery + "</a></p>";
-                    window.location = chromeQuery;
-                } else {
-                    // Si l'utilisateur utilise Safari, nous ouvrons toujours la version HTTPS normale
-                    document.body.innerHTML += "<p>Using Safari on iOS. URL: <a href='" + query + "'>" + query + "</a></p>";
+                // Tente d'ouvrir Chrome sur iOS
+                setTimeout(function() {
+                    document.body.innerHTML += "<p>Redirection vers Chrome échouée, redirection vers Safari.</p>";
                     window.location = query;
-                }
+                }, 25);
+                window.location = chromeQuery;
             } else {
                 // Pour les autres plateformes
                 document.body.innerHTML += "<p>Not iOS. URL: <a href='" + query + "'>" + query + "</a></p>";
