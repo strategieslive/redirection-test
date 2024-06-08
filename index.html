@@ -4,25 +4,53 @@
     <title>Laissez un avis</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             text-align: center;
+            background-color: #f4f4f9;
             padding: 50px;
+            margin: 0;
+        }
+        .container {
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 500px;
+            margin: 50px auto;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        p {
+            color: #666;
+            margin-bottom: 40px;
         }
         .button {
             display: inline-block;
             padding: 20px 30px;
-            margin: 20px;
-            font-size: 20px;
+            margin: 20px 10px;
+            font-size: 18px;
             color: white;
             text-decoration: none;
-            border-radius: 10px;
-            width: 300px;
+            border-radius: 5px;
+            width: calc(100% - 40px);
+            box-sizing: border-box;
+            transition: background 0.3s, transform 0.3s;
         }
         .button-safari {
             background-color: #1e90ff;
         }
+        .button-safari:hover {
+            background-color: #1c7ed6;
+            transform: scale(1.05);
+        }
         .button-chrome {
             background-color: #f44336;
+        }
+        .button-chrome:hover {
+            background-color: #e03e2d;
+            transform: scale(1.05);
         }
         .button img {
             vertical-align: middle;
@@ -37,13 +65,15 @@
     </script>
 </head>
 <body>
-    <h1>Laissez un avis</h1>
-    <p>Choisissez votre navigateur préféré pour laisser un avis :</p>
-    <a class="button button-safari" href="https://g.page/r/CcN_-2m8sPZ0EB0/review">
-        <img src="safari-logo.png" alt="Safari" width="24" height="24"> Laissez un avis avec Safari
-    </a>
-    <a class="button button-chrome" href="#" onclick="openChrome()">
-        <img src="chrome-logo.png" alt="Chrome" width="24" height="24"> Laissez un avis avec Google Chrome
-    </a>
+    <div class="container">
+        <h1>Laissez un avis</h1>
+        <p>Choisissez votre navigateur préféré pour laisser un avis :</p>
+        <a class="button button-safari" href="https://g.page/r/CcN_-2m8sPZ0EB0/review">
+            <img src="safari-logo.png" alt="Safari" width="24" height="24"> Laissez un avis avec Safari
+        </a>
+        <a class="button button-chrome" href="#" onclick="openChrome()">
+            <img src="chrome-logo.png" alt="Chrome" width="24" height="24"> Laissez un avis avec Google Chrome
+        </a>
+    </div>
 </body>
 </html>
