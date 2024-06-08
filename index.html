@@ -21,10 +21,12 @@
                     document.body.innerHTML += "<p>Using Chrome on iOS. URL: <a href='" + chromeQuery + "'>" + chromeQuery + "</a></p>";
                     window.location = chromeQuery;
                 } else {
+                    // Si l'utilisateur utilise Safari, nous ouvrons toujours la version HTTPS normale
                     document.body.innerHTML += "<p>Using Safari on iOS. URL: <a href='" + query + "'>" + query + "</a></p>";
                     window.location = query;
                 }
             } else {
+                // Pour les autres plateformes
                 document.body.innerHTML += "<p>Not iOS. URL: <a href='" + query + "'>" + query + "</a></p>";
                 window.location = query;
             }
