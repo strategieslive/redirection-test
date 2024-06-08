@@ -6,17 +6,18 @@
         function openLink() {
             var userAgent = navigator.userAgent || navigator.vendor || window.opera;
             var isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
-            var query = 'https://g.page/r/CcN_-2m8sPZ0EB0/review';
             var chromeQuery = 'googlechrome://g.page/r/CcN_-2m8sPZ0EB0/review';
+            var appStoreURL = 'https://apps.apple.com/us/app/google-chrome/id535886823';
+            var query = 'https://g.page/r/CcN_-2m8sPZ0EB0/review';
             var triedChrome = false;
 
             if (isIOS) {
                 // Essaye d'ouvrir Chrome sur iOS
                 var timeout = setTimeout(function() {
                     if (!triedChrome) {
-                        window.location = query;
+                        window.location = appStoreURL;
                     }
-                }, 1000); // délai de 1 seconde
+                }, 2000); // délai de 2 secondes
 
                 window.location = chromeQuery;
 
@@ -28,7 +29,7 @@
 
                 window.addEventListener('focus', function() {
                     if (!triedChrome) {
-                        window.location = query;
+                        window.location = appStoreURL;
                     }
                 });
             } else {
