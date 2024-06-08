@@ -62,6 +62,22 @@
             var chromeURL = 'googlechrome://g.page/r/CcN_-2m8sPZ0EB0/review';
             window.location = chromeURL;
         }
+
+        function detectDeviceAndRedirect() {
+            var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+            if (/windows phone/i.test(userAgent)) {
+                window.location.href = "https://g.page/r/CcN_-2m8sPZ0EB0/review";
+            } else if (/android/i.test(userAgent)) {
+                window.location.href = "https://g.page/r/CcN_-2m8sPZ0EB0/review";
+            } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+                // iOS device, do nothing and show the buttons
+            } else {
+                window.location.href = "https://g.page/r/CcN_-2m8sPZ0EB0/review";
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', detectDeviceAndRedirect);
     </script>
 </head>
 <body>
