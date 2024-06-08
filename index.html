@@ -58,11 +58,6 @@
         }
     </style>
     <script>
-        function openChrome() {
-            var chromeURL = 'googlechrome://g.page/r/CcN_-2m8sPZ0EB0/review';
-            window.location = chromeURL;
-        }
-
         function detectDeviceAndRedirect() {
             var userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
@@ -72,6 +67,8 @@
                 window.location.href = "https://g.page/r/CcN_-2m8sPZ0EB0/review";
             } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
                 // iOS device, do nothing and show the buttons
+            } else if (/windows/i.test(userAgent)) {
+                window.location.href = "https://g.page/r/CcN_-2m8sPZ0EB0/review";
             } else {
                 window.location.href = "https://g.page/r/CcN_-2m8sPZ0EB0/review";
             }
@@ -91,5 +88,11 @@
             <img src="chrome-logo.png" alt="Chrome" width="24" height="24"> Laissez un avis avec Google Chrome
         </a>
     </div>
+    <script>
+        function openChrome() {
+            var chromeURL = 'googlechrome://g.page/r/CcN_-2m8sPZ0EB0/review';
+            window.location = chromeURL;
+        }
+    </script>
 </body>
 </html>
