@@ -1,36 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Redirection vers le lien Google</title>
-    <script>
-        function openLink() {
-            var userAgent = navigator.userAgent || navigator.vendor || window.opera;
-            document.body.innerHTML += "<p>User Agent: " + userAgent + "</p>";
-
-            // URL de la requête pour le lien Google
-            var query = 'https://g.page/r/CcN_-2m8sPZ0EB0/review';
-            var chromeQuery = 'googlechrome://g.page/r/CcN_-2m8sPZ0EB0/review';
-
-            // Vérifie si l'utilisateur est sur iOS
-            var isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
-            document.body.innerHTML += "<p>Is iOS: " + isIOS + "</p>";
-
-            if (isIOS) {
-                // Tente d'ouvrir Chrome sur iOS avec un délai plus long avant de rediriger vers Safari
-                setTimeout(function() {
-                    document.body.innerHTML += "<p>Redirection vers Chrome échouée, redirection vers Safari.</p>";
-                    window.location = query;
-                }, 2000); // Augmente le délai à 2 secondes
-                window.location = chromeQuery;
-            } else {
-                // Pour les autres plateformes
-                document.body.innerHTML += "<p>Not iOS. URL: <a href='" + query + "'>" + query + "</a></p>";
-                window.location = query;
-            }
-        }
-    </script>
+    <title>Redirection en cours</title>
+    <meta http-equiv="refresh" content="0; url=googlechrome://g.page/r/CcN_-2m8sPZ0EB0/review" />
 </head>
-<body onload="openLink()">
+<body>
     <p>Redirection en cours...</p>
 </body>
 </html>
