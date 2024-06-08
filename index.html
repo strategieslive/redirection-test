@@ -27,6 +27,7 @@
             var isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
 
             if (isIOS) {
+                var start = Date.now();
                 var chromeInstalled = false;
                 var iframe = document.createElement('iframe');
                 iframe.style.display = 'none';
@@ -47,7 +48,7 @@
                     if (!chromeInstalled) {
                         document.getElementById('chromeButton').innerHTML = "Installer Google Chrome";
                     }
-                }, 1000);
+                }, 1500);
             } else {
                 document.getElementById('chromeButton').style.display = "none";
             }
