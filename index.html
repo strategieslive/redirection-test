@@ -12,19 +12,22 @@
             var query = 'https://g.page/r/CcN_-2m8sPZ0EB0/review';
 
             if (isIOS) {
-                var now = new Date().getTime();
-                setTimeout(function () {
-                    if (new Date().getTime() - now < 2000) {
-                        // Si le temps écoulé est inférieur à 2 secondes, Chrome n'est probablement pas installé
+                // Essaye d'ouvrir Chrome sur iOS en utilisant une balise meta refresh
+                var start = Date.now();
+                var timeout = setTimeout(function() {
+                    if (Date.now() - start < 1000) {
+                        // Si le temps écoulé est inférieur à 1 seconde, Chrome n'est probablement pas installé
                         window.location = appStoreURL;
                     }
-                }, 1000);
+                }, 800); // délai de 0,8 seconde
 
                 window.location = chromeQuery;
 
                 // Redirige vers l'URL normale après un délai pour éviter l'erreur de Safari
                 setTimeout(function() {
-                    window.location = query;
+                    if (Date.now() - start < 1500) {
+                        window.location = query;
+                    }
                 }, 1500); // Délai de 1,5 secondes
             } else {
                 // Pour les autres plateformes
